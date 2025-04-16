@@ -70,19 +70,31 @@ int main()
 {
 	int fd = open("mint.txt",O_CREAT | O_WRONLY,0755);
 	// open(int fd, flag, mode);
+
 	if(fd == -1)
 	{
 		perror("num");
 		exit(1); // stdlib
 	}
+
 	char buf[11] = "123456789";
 	write(fd,buf,10); // write(fd, buf, size);
+
 	close(fd);
 
 	fd = open("mint.txt",O_RDONLY);
+
+	if(fd == -1)
+	{
+		perror("num");
+		exit(1); // stdlib
+	}
+
 	char rbuf[10];
+
 	while(read(fd,rbuf,3)>0)
 		printf("%s ", rbuf);
+
 	printf("\n");
 	close(fd);
 	return 0;
